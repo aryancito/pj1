@@ -72,7 +72,7 @@ def limpieza(ruta, df_magistrados_maestra):
     maestra_vs_fallos['FECHA']  = maestra_vs_fallos['FECHA'] .apply(lambda x: x[:10])
 
     a = maestra_vs_fallos['FECHA'].unique().tolist()
-    a = [item.replace("/", "-") for item in a]
+    a = [item.replace("-", "/") for item in a]
 
     maestra_vs_fallos = maestra_vs_fallos.assign(FECHA_global=a[1])
 

@@ -82,13 +82,10 @@ def limpieza(ruta, df_magistrados_maestra):
          ]
     )
     maestra_vs_jescucha['FECHA'] = pd.to_datetime(maestra_vs_jescucha['FECHA'])
-    maestra_vs_jescucha['FECHA'] = [d.strftime('%Y-%m-%d') if not pd.isnull(d) else '' for d in
-                                  maestra_vs_jescucha['FECHA']]
-    maestra_vs_jescucha['FECHA'] = pd.to_datetime(maestra_vs_jescucha['FECHA'], format='%Y/%m/%d')
-
     a = maestra_vs_jescucha['FECHA'].unique().tolist()
     a = pd.to_datetime(a, format='%Y-%m-%d')
     a = a.strftime('%Y-%d-%m')
+
 
     maestra_vs_jescucha = maestra_vs_jescucha.assign(FECHA_global=a[1])
     maestra_vs_jescucha['FECHA'] = maestra_vs_jescucha['FECHA'].astype(str)
