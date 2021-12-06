@@ -29,9 +29,9 @@ def do_something():
     time.sleep(0.3)
 # title RUTA DEL DIRECTORIO
 # **********************************************************************************************************************
-fecha               = "01-12-2021"
-ruta                = r"C:/Users/Aryan/Documents/ATD_archivos/"
-ruta_credencial_bq  = r'C:\Users\Aryan\PycharmProjects\PJ_ATD\credenciales\bq_python.json'
+fecha               = "2021-12-01"
+ruta                = r"C:\Users\opaucarb\Documents\AVANCE_TRANSFORMACION_DIGITAL\ARCHIVOS/"
+ruta_credencial_bq  = r'C:\Users\opaucarb\PycharmProjects\a_trans_digital\credenciales\bq_python.json'
 directorio = ruta + fecha
 lista_archivos=os.listdir(directorio)
 # verificar que los archivos correspondan
@@ -50,7 +50,7 @@ a_jescucha           = directorio + '\\' +"Juez_escucha.xlsx"
 # 'replace' # Si la tabla existe, suéltela, vuelva a crearla e inserte los datos.
 # 'append' # Si existe una tabla, inserte los datos. Crear si no existe.
 
-bq_modo                     = 'replace'
+bq_modo                     = 'append'
 project_id                  = 'pe-pjp-cld-01'
 contenedor                  = 'PY_DATA_TRANS_DIGITAL2'
 bq_t_resumen                = 'resumen'
@@ -60,6 +60,7 @@ bq_maestra_vs_resoluciones  = 'maestra_vs_resoluciones2'
 bq_maestra_vs_notificaciones= 'maestra_vs_notificaciones'
 bq_maestra_vs_fallos        = 'maestra_vs_fallos'
 bq_maestra_vs_jescuha       = 'maestra_vs_juez_escucha'
+fecha2=fecha.replace('-','/')
 #***********************************************************************************************************************
 #limpieza de dataos
 
@@ -69,23 +70,23 @@ for i in trange(1, file=sys.stdout, desc='******************** LECTURA Y LIMPIEZ
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA '):
         do_something()
 
-    maestra_vs_sesiones       = sesi.limpieza(a_sesiones_asa,a_sesiones_ase,df_maestra)
+    maestra_vs_sesiones       = sesi.limpieza(a_sesiones_asa,a_sesiones_ase,df_maestra,fecha2)
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS SESIONES '):
         do_something()
 
-    maestra_vs_resoluciones   = reso.limpieza(a_resoluciones,df_maestra)
+    maestra_vs_resoluciones   = reso.limpieza(a_resoluciones,df_maestra,fecha2)
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS RESOLUCIONES '):
         do_something()
 
-    maestra_vs_notificaciones = noti.limpieza(a_notificaciones_asa,a_notificaciones_ase,df_maestra)
+    maestra_vs_notificaciones = noti.limpieza(a_notificaciones_asa,a_notificaciones_ase,df_maestra,fecha2)
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS NOTIFICACIONES '):
         do_something()
 
-    maestra_vs_fallos         = fall.limpieza(a_fallos,df_maestra)
+    maestra_vs_fallos         = fall.limpieza(a_fallos,df_maestra,fecha2)
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS FALLOS '):
         do_something()
 
-    maestra_vs_jescucha       = jesc.limpieza(a_jescucha,df_maestra)
+    maestra_vs_jescucha       = jesc.limpieza(a_jescucha,df_maestra,fecha2)
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS JUEZ ESCUCHA'):
         do_something()
 
@@ -155,3 +156,5 @@ print("\033[1;33m"+"CON FECHA -> "+fecha+'\033[0;m')
 print("\033[1;33m"+"PROCESO COMPLETADO CON EXITO XD - VE Y COMETE UN TOKTOCHI"+'\033[0;m')
 #playsound('C:/Users/Aryan/PycharmProjects/PJ_ATD/audio/operacion_exitosa.mp3')
 #https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=es&q=operacion%20exitosa
+
+

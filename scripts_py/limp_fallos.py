@@ -1,7 +1,7 @@
 # LIMPIEZA PARA SENTIDO DE fallos
 import pandas as pd
 import numpy as np
-def limpieza(ruta, df_magistrados_maestra):
+def limpieza(ruta, df_magistrados_maestra,fecha):
     df_fallos = pd.read_excel(ruta)
     df_fallos = (df_fallos.loc[:, [
                                       'c_dj',
@@ -74,7 +74,7 @@ def limpieza(ruta, df_magistrados_maestra):
     a = maestra_vs_fallos['FECHA'].unique().tolist()
     a = [item.replace("-", "/") for item in a]
 
-    maestra_vs_fallos = maestra_vs_fallos.assign(FECHA_global=a[1])
+    maestra_vs_fallos = maestra_vs_fallos.assign(FECHA_global=fecha)
 
     n_registros_maestra_vs_fallos = maestra_vs_fallos.shape[0]
     maestra_vs_fallos['N_REGISTROS'] = n_registros_maestra_vs_fallos

@@ -1,6 +1,6 @@
 # ejecutar en lugar de main
 import pandas as pd
-directorio = r"C:\Users\Aryan\Documents\ATD_archivos\juez_historico\T-224479-Ejecutar el script adjunto en la bds Juez te Escucha - GG.xlsx"
+directorio = r"C:\Users\opaucarb\Documents\AVANCE_TRANSFORMACION_DIGITAL\ARCHIVOS\JUEZ_ESCUCHA\T-224479-Ejecutar el script adjunto en la bds Juez te Escucha - GG.xlsx"
 df = pd.read_excel(directorio)
 
 df['F_ATENCION_INICIO2'] = df['F_ATENCION_INICIO'].apply(lambda x: x[:10])

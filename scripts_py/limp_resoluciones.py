@@ -8,7 +8,7 @@ import scripts_py.unir_mismo as unir_mismo
 from datetime import datetime
 
 
-def limpieza(ruta, df_magistrados_maestra):
+def limpieza(ruta, df_magistrados_maestra,fecha2):
     df_resoluciones = pd.read_excel(ruta)
     df_resoluciones = (df_resoluciones.loc[:, [
                                                   'corte',
@@ -78,7 +78,7 @@ def limpieza(ruta, df_magistrados_maestra):
     a = maestra_vs_resoluciones['FECHA'].unique().tolist()
     a = pd.to_datetime(a, format='%Y/%m/%d')
     a = a.strftime('%Y/%d/%m')
-    maestra_vs_resoluciones = maestra_vs_resoluciones.assign(FECHA_global=a[0])
+    maestra_vs_resoluciones = maestra_vs_resoluciones.assign(FECHA_global=fecha2)
     maestra_vs_resoluciones
 
     return maestra_vs_resoluciones

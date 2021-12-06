@@ -4,7 +4,7 @@ import pandas as pd
 from openpyxl import load_workbook
 import scripts_py.unir_mismo as unir_mismo
 
-def limpieza(archivo_sesiones_asa, archivo_sesiones_ase, df_magistrados_maestra):
+def limpieza(archivo_sesiones_asa, archivo_sesiones_ase, df_magistrados_maestra,fecha2):
     df_sesiones_ase = unir_mismo.unir(archivo_sesiones_ase)
     df_sesiones_ase = (df_sesiones_ase.loc[:, [ 'corte',
                                                 'fecha',
@@ -68,7 +68,7 @@ def limpieza(archivo_sesiones_asa, archivo_sesiones_ase, df_magistrados_maestra)
     a = maestra_vs_sesiones['FECHA'].unique().tolist()
     a = pd.to_datetime(a, format='%Y-%m-%d')
     a = a.strftime('%Y/%d/%m')
-    maestra_vs_sesiones = maestra_vs_sesiones.assign(FECHA_global=a[0])
+    maestra_vs_sesiones = maestra_vs_sesiones.assign(FECHA_global=fecha2)
     n_registros_maestra_vs_sesiones = maestra_vs_sesiones.shape[0]
     maestra_vs_sesiones['N_REGISTROS'] = n_registros_maestra_vs_sesiones
     maestra_vs_sesiones['DNI_MAGISTRADO'] = maestra_vs_sesiones['DNI_MAGISTRADO'].astype(str)

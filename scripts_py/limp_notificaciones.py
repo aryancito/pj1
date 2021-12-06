@@ -4,7 +4,7 @@ import pandas as pd
 import import_ipynb
 import scripts_py.unir_mismo as unir_mismo
 
-def limpieza(archivo_notificaciones_ase, archivo_notificaciones_asa, df_magistrados_maestra):
+def limpieza(archivo_notificaciones_ase, archivo_notificaciones_asa, df_magistrados_maestra,fecha2):
     ##df_notificaciones_ase= unir_mismo.unir(archivo_notificaciones_ase)
     df_notificaciones_ase = pd.read_excel(archivo_notificaciones_ase)
     df_notificaciones_ase = (df_notificaciones_ase.loc[:, [
@@ -61,7 +61,7 @@ def limpieza(archivo_notificaciones_ase, archivo_notificaciones_asa, df_magistra
     a = maestra_vs_notificaciones['FECHA'].unique().tolist()
     a = pd.to_datetime(a, format='%Y-%m-%d')
     a = a.strftime('%Y/%d/%m')
-    maestra_vs_notificaciones = maestra_vs_notificaciones.assign(FECHA_global=a[0])
+    maestra_vs_notificaciones = maestra_vs_notificaciones.assign(FECHA_global=fecha2)
     n_registros_maestra_vs_notificaciones = maestra_vs_notificaciones.shape[0]
     maestra_vs_notificaciones['N_REGISTROS'] = n_registros_maestra_vs_notificaciones
     maestra_vs_notificaciones['DNI_MAGISTRADO'] = maestra_vs_notificaciones['DNI_MAGISTRADO'].astype(str)

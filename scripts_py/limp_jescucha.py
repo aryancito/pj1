@@ -2,7 +2,7 @@
 import pandas as pd
 import numpy as np
 
-def limpieza(ruta, df_magistrados_maestra):
+def limpieza(ruta, df_magistrados_maestra,fecha):
     df_jescucha = pd.read_excel(ruta)
     df_jescucha = (df_jescucha.loc[:, [
                                       'ID_EVENTO',
@@ -82,12 +82,12 @@ def limpieza(ruta, df_magistrados_maestra):
          ]
     )
     maestra_vs_jescucha['FECHA'] = pd.to_datetime(maestra_vs_jescucha['FECHA'])
-    a = maestra_vs_jescucha['FECHA'].unique().tolist()
-    a = pd.to_datetime(a, format='%Y-%m-%d')
-    a = a.strftime('%Y-%d-%m')
+    #a = maestra_vs_jescucha['FECHA'].unique().tolist()
+    #a = pd.to_datetime(a, format='%d/%m/%Y')
+    #a = a.strftime('%d/%m/%Y')
 
 
-    maestra_vs_jescucha = maestra_vs_jescucha.assign(FECHA_global=a[1])
+    maestra_vs_jescucha = maestra_vs_jescucha.assign(FECHA_global=fecha)
     maestra_vs_jescucha['FECHA'] = maestra_vs_jescucha['FECHA'].astype(str)
 
     n_registros_maestra_vs_jescucha = maestra_vs_jescucha.shape[0]
@@ -95,5 +95,8 @@ def limpieza(ruta, df_magistrados_maestra):
     maestra_vs_jescucha['DNI_MAGISTRADO'] = maestra_vs_jescucha['DNI_MAGISTRADO'].astype(str)
     maestra_vs_jescucha['DNI_MAGISTRADO'] = maestra_vs_jescucha['DNI_MAGISTRADO'].apply(lambda x: x.zfill(8))
     maestra_vs_jescucha[['COD_UNIDAD_EJECUTORA', 'COD_CORTE','COD_TIPO_DEPENDENCIA','COD_DEPENDENCIA']]= maestra_vs_jescucha[['COD_UNIDAD_EJECUTORA', 'COD_CORTE','COD_TIPO_DEPENDENCIA','COD_DEPENDENCIA']].astype(float)
-    #return maestra_vs_fallos
+    maestra_vs_jescucha['NOMBRE_MAGISTRADO_y'] = maestra_vs_jescucha['NOMBRE_MAGISTRADO_y'].astype(str)
+    maestra_vs_jescucha['PERFIL_USUARIO_ATENCION'] = maestra_vs_jescucha['PERFIL_USUARIO_ATENCION'].astype(str)
+    maestra_vs_jescucha['Comparacion_cant'] = maestra_vs_jescucha['Comparacion_cant'].astype(str)
+    maestra_vs_jescucha['Comparacion'] = maestra_vs_jescucha['Comparacion'].astype(str)
     return maestra_vs_jescucha
