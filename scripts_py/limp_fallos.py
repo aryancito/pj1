@@ -1,8 +1,6 @@
 # LIMPIEZA PARA SENTIDO DE fallos
 import pandas as pd
 import numpy as np
-
-
 def limpieza(ruta, df_magistrados_maestra):
     df_fallos = pd.read_excel(ruta)
     df_fallos = (df_fallos.loc[:, [
@@ -70,18 +68,19 @@ def limpieza(ruta, df_magistrados_maestra):
         ['DNI_MAGISTRADO'
          ]
     )
-    maestra_vs_fallos['FECHA'] = pd.to_datetime(maestra_vs_fallos['FECHA'])
-    maestra_vs_fallos['FECHA'] = [d.strftime('%Y-%m-%d') if not pd.isnull(d) else '' for d in
-                                  maestra_vs_fallos['FECHA']]
-    maestra_vs_fallos['FECHA'] = pd.to_datetime(maestra_vs_fallos['FECHA'], format='%Y/%m/%d')
+    maestra_vs_fallos['FECHA']  = maestra_vs_fallos['FECHA'].astype(str)
+    maestra_vs_fallos['FECHA']  = maestra_vs_fallos['FECHA'] .apply(lambda x: x[:10])
+
     a = maestra_vs_fallos['FECHA'].unique().tolist()
-    a = pd.to_datetime(a, format='%Y-%m-%d')
-    a = a.strftime('%Y/%d/%m')
-    maestra_vs_fallos = maestra_vs_fallos.assign(FECHA_global=a[0])
+    a = [item.replace("/", "-") for item in a]
+
+    maestra_vs_fallos = maestra_vs_fallos.assign(FECHA_global=a[1])
+
     n_registros_maestra_vs_fallos = maestra_vs_fallos.shape[0]
     maestra_vs_fallos['N_REGISTROS'] = n_registros_maestra_vs_fallos
     maestra_vs_fallos['DNI_MAGISTRADO'] = maestra_vs_fallos['DNI_MAGISTRADO'].astype(str)
     maestra_vs_fallos['DNI_MAGISTRADO'] = maestra_vs_fallos['DNI_MAGISTRADO'].apply(lambda x: x.zfill(8))
     maestra_vs_fallos[['COD_UNIDAD_EJECUTORA', 'COD_CORTE','COD_TIPO_DEPENDENCIA','COD_DEPENDENCIA']]= maestra_vs_fallos[['COD_UNIDAD_EJECUTORA', 'COD_CORTE','COD_TIPO_DEPENDENCIA','COD_DEPENDENCIA']].astype(float)
-    #return maestra_vs_fallos
     return maestra_vs_fallos
+#return maestra_vs_fallos
+

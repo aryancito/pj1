@@ -77,7 +77,7 @@ def limpieza(ruta, df_magistrados_maestra):
     maestra_vs_resoluciones['FECHA'] = pd.to_datetime(maestra_vs_resoluciones['FECHA'])
     a = maestra_vs_resoluciones['FECHA'].unique().tolist()
     a = pd.to_datetime(a, format='%Y-%m-%d')
-    a = a.strftime('%Y/%d/%m')
+    a = a.strftime('%Y-%d-%m')
     maestra_vs_resoluciones = maestra_vs_resoluciones.assign(FECHA_global=a[0])
     maestra_vs_resoluciones
 

@@ -9,6 +9,7 @@ import time
 import sys
 from tqdm import trange
 import random
+#from playsound import playsound
 # ----------------------------------
 import scripts_py.limp_maestra as limp
 # import scripts_py.unir_mismo
@@ -29,20 +30,20 @@ def do_something():
 # title RUTA DEL DIRECTORIO
 # **********************************************************************************************************************
 fecha               = "01-12-2021"
-ruta                = "C:/Users/opaucarb/Documents/AVANCE_TRANSFORMACION_DIGITAL/ARCHIVOS/"
-ruta_credencial_bq  = r'C:\Users\opaucarb\PycharmProjects\a_trans_digital\credenciales\bq_python.json'
+ruta                = r"C:/Users/Aryan/Documents/ATD_archivos/"
+ruta_credencial_bq  = r'C:\Users\Aryan\PycharmProjects\PJ_ATD\credenciales\bq_python.json'
 directorio = ruta + fecha
 lista_archivos=os.listdir(directorio)
 # verificar que los archivos correspondan
 #-----------------------------------------------------------------------------------------------------------------------
-a_maestra            = directorio + '\\' +"Query_Magistrados_V3.xlsx"
-a_sesiones_asa       = directorio + '\\' +"01.Script_GLPI_xxxxx_Reporte_Sesiones_Juez_x_dia ASA V3.xlsx"
-a_sesiones_ase       = directorio + '\\' +"01.Script_GLPI_xxxxx_Reporte_Sesiones_Juez_x_dia ASE V3.xlsx"
-a_resoluciones       = directorio + '\\' +"02.Resoluciones_Firmada-Modificada V3.xlsx"
-a_notificaciones_asa = directorio + '\\' +"03.Notificaciones_Juez_x_dia ASA V3.xlsx"
-a_notificaciones_ase = directorio + '\\' +"03.Notificaciones_Juez_x_dia ASE V3.xlsx"
-a_fallos             = directorio + '\\' +"Sentido de Fallo Diario V3.xlsx"
-a_jescucha           = directorio + '\\' +"JUEZ ESCUCHA-"+fecha+".xlsx"
+a_maestra            = directorio + '\\' +"Query_Magistrados.xlsx"
+a_sesiones_asa       = directorio + '\\' +"Reporte_Sesiones_Juez_x_dia_ASA.xlsx"
+a_sesiones_ase       = directorio + '\\' +"Reporte_Sesiones_Juez_x_dia_ASE.xlsx"
+a_resoluciones       = directorio + '\\' +"Resoluciones_Firmada_Modificada.xlsx"
+a_notificaciones_asa = directorio + '\\' +"Notificaciones_Juez_x_dia_ASA.xlsx"
+a_notificaciones_ase = directorio + '\\' +"Notificaciones_Juez_x_dia_ASE.xlsx"
+a_fallos             = directorio + '\\' +"Sentido_de_Fallo.xlsx"
+a_jescucha           = directorio + '\\' +"Juez_escucha.xlsx"
 # a_casillero        = directorio + '\\' +""
 #-----------------------------------------------------------------------------------------------------------------------
 # 'fail' # Si existe una tabla, genere pandas_gbq.gbq.TableCreationError.
@@ -149,7 +150,7 @@ for i in trange(1, file=sys.stdout, desc='******************** CARGA DE ARCHIVOS
                                   credentials=credentials)
     print("\033[1;31m" + bq_maestra_vs_jescuha +"----------- Carga satisfactoria a BigQuery--OK!")
 # -----------------------------------------------------------------------------------------------------------------------
-contenedor
 print("\033[1;33m"+"ALAMACENADO EN -> "+contenedor+'\033[0;m')
 print("\033[1;33m"+"CON FECHA -> "+fecha+'\033[0;m')
 print("\033[1;33m"+"PROCESO COMPLETADO CON EXITO XD - VE Y COMETE UN TOKTOCHI"+'\033[0;m')
+#playsound('C:/Users/Aryan/PycharmProjects/PJ_ATD/audio/operacion_exitosa.mp3')
