@@ -43,7 +43,7 @@ a_resoluciones       = directorio + '\\' +"Resoluciones_Firmada_Modificada.xlsx"
 a_notificaciones_asa = directorio + '\\' +"Notificaciones_Juez_x_dia_ASA.xlsx"
 a_notificaciones_ase = directorio + '\\' +"Notificaciones_Juez_x_dia_ASE.xlsx"
 a_fallos             = directorio + '\\' +"Sentido_de_Fallo.xlsx"
-a_jescucha           = directorio + '\\' +"Juez_escucha.xlsx"
+#a_jescucha           = directorio + '\\' +"Juez_escucha.xlsx"
 # a_casillero        = directorio + '\\' +""
 #-----------------------------------------------------------------------------------------------------------------------
 # 'fail' # Si existe una tabla, genere pandas_gbq.gbq.TableCreationError.
@@ -52,14 +52,14 @@ a_jescucha           = directorio + '\\' +"Juez_escucha.xlsx"
 
 bq_modo                     = 'append'
 project_id                  = 'pe-pjp-cld-01'
-contenedor                  = 'PY_DATA_TRANS_DIGITAL2'
+contenedor                  = 'PY_TEST_TRANS_DIGITAL'
 bq_t_resumen                = 'resumen'
 bq_t_resumen_x              = 'resumen_X'
 bq_maestra_vs_sesiones      = 'maestra_vs_sesiones'
 bq_maestra_vs_resoluciones  = 'maestra_vs_resoluciones2'
 bq_maestra_vs_notificaciones= 'maestra_vs_notificaciones'
 bq_maestra_vs_fallos        = 'maestra_vs_fallos'
-bq_maestra_vs_jescuha       = 'maestra_vs_juez_escucha'
+#bq_maestra_vs_jescuha       = 'maestra_vs_juez_escucha'
 fecha2=fecha.replace('-','/')
 #***********************************************************************************************************************
 #limpieza de dataos
@@ -86,11 +86,7 @@ for i in trange(1, file=sys.stdout, desc='******************** LECTURA Y LIMPIEZ
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS FALLOS '):
         do_something()
 
-    maestra_vs_jescucha       = jesc.limpieza(a_jescucha,df_maestra,fecha2)
-    for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----MAESTRA VS JUEZ ESCUCHA'):
-        do_something()
-
-    resumenes   = resumen.resumenes(maestra_vs_sesiones, maestra_vs_resoluciones, maestra_vs_notificaciones, maestra_vs_fallos, maestra_vs_jescucha)
+    resumenes   = resumen.resumenes(maestra_vs_sesiones, maestra_vs_resoluciones, maestra_vs_notificaciones, maestra_vs_fallos)
     #resumenes   = resumen.resumenes(maestra_vs_sesiones, maestra_vs_resoluciones, maestra_vs_notificaciones, maestra_vs_fallos)
     for i in trange(random.randint(1, 5), file=sys.stdout, desc='-----RESUMENES'):
         do_something()
@@ -145,11 +141,6 @@ for i in trange(1, file=sys.stdout, desc='******************** CARGA DE ARCHIVOS
                                   credentials=credentials)
     print("\033[1;31m" + bq_maestra_vs_fallos +"----------- Carga satisfactoria a BigQuery--OK!")
 # -----------------------------------------------------------------------------------------------------------------------
-    errors0 = maestra_vs_jescucha.to_gbq(destination_table=contenedor + bq_maestra_vs_jescuha,
-                                  project_id='pe-pjp-cld-01',
-                                  if_exists=bq_modo,
-                                  credentials=credentials)
-    print("\033[1;31m" + bq_maestra_vs_jescuha +"----------- Carga satisfactoria a BigQuery--OK!")
 # -----------------------------------------------------------------------------------------------------------------------
 print("\033[1;33m"+"ALAMACENADO EN -> "+contenedor+'\033[0;m')
 print("\033[1;33m"+"CON FECHA -> "+fecha+'\033[0;m')
