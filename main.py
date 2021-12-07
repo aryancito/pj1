@@ -9,7 +9,8 @@ import time
 import sys
 from tqdm import trange
 import random
-#from playsound import playsound
+from playsound import playsound
+
 # ----------------------------------
 import scripts_py.limp_maestra as limp
 # import scripts_py.unir_mismo
@@ -29,7 +30,7 @@ def do_something():
     time.sleep(0.3)
 # title RUTA DEL DIRECTORIO
 # **********************************************************************************************************************
-fecha               = "2021-12-01"
+fecha               = "2021-11-30"
 ruta                = r"C:\Users\opaucarb\Documents\AVANCE_TRANSFORMACION_DIGITAL\ARCHIVOS/"
 ruta_credencial_bq  = r'C:\Users\opaucarb\PycharmProjects\a_trans_digital\credenciales\bq_python.json'
 directorio = ruta + fecha
@@ -50,9 +51,9 @@ a_jescucha           = directorio + '\\' +"Juez_escucha.xlsx"
 # 'replace' # Si la tabla existe, suéltela, vuelva a crearla e inserte los datos.
 # 'append' # Si existe una tabla, inserte los datos. Crear si no existe.
 
-bq_modo                     = 'append'
+bq_modo                     = 'replace'
 project_id                  = 'pe-pjp-cld-01'
-contenedor                  = 'PY_DATA_TRANS_DIGITAL2'
+contenedor                  = 'PY_TEST_TRANS_DIGITAL'
 bq_t_resumen                = 'resumen'
 bq_t_resumen_x              = 'resumen_X'
 bq_maestra_vs_sesiones      = 'maestra_vs_sesiones'
@@ -151,10 +152,11 @@ for i in trange(1, file=sys.stdout, desc='******************** CARGA DE ARCHIVOS
                                   credentials=credentials)
     print("\033[1;31m" + bq_maestra_vs_jescuha +"----------- Carga satisfactoria a BigQuery--OK!")
 # -----------------------------------------------------------------------------------------------------------------------
-print("\033[1;33m"+"ALAMACENADO EN -> "+contenedor+'\033[0;m')
-print("\033[1;33m"+"CON FECHA -> "+fecha+'\033[0;m')
-print("\033[1;33m"+"PROCESO COMPLETADO CON EXITO XD - VE Y COMETE UN TOKTOCHI"+'\033[0;m')
-#playsound('C:/Users/Aryan/PycharmProjects/PJ_ATD/audio/operacion_exitosa.mp3')
-#https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=es&q=operacion%20exitosa
+    print("\033[1;33m"+"ALAMACENADO EN -> "+contenedor+'\033[0;m')
+    print("\033[1;33m"+"CON FECHA -> "+fecha+'\033[0;m')
+    print("\033[1;33m"+"PROCESO COMPLETADO CON EXITO XD - VE Y COMETE UN TOKTOCHI"+'\033[0;m')
 
+playsound('C:/Users/opaucarb/PycharmProjects/a_trans_digital/audio/padawan.mp3')
+
+#https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=es&q=operacion%20exitosa
 
