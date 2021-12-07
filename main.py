@@ -9,7 +9,7 @@ import time
 import sys
 from tqdm import trange
 import random
-from playsound import playsound
+import pygame
 
 # ----------------------------------
 import scripts_py.limp_maestra as limp
@@ -156,7 +156,11 @@ for i in trange(1, file=sys.stdout, desc='******************** CARGA DE ARCHIVOS
     print("\033[1;33m"+"CON FECHA -> "+fecha+'\033[0;m')
     print("\033[1;33m"+"PROCESO COMPLETADO CON EXITO XD - VE Y COMETE UN TOKTOCHI"+'\033[0;m')
 
-playsound('C:/Users/opaucarb/PycharmProjects/a_trans_digital/audio/padawan.mp3')
+file = r'C:\Users\opaucarb\PycharmProjects\a_trans_digital\audio\padawan.mp3'
+pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.load(file)
+pygame.mixer.music.play()
 
-#https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=es&q=operacion%20exitosa
-
+while pygame.mixer.music.get_busy():
+    pygame.time.Clock().tick(10)|
